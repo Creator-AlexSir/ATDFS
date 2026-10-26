@@ -1,0 +1,201 @@
+/* --- 1. Переменные --- */
+:root {
+  --navy-900: #0b1a33;
+  --navy-800: #11264a;
+  --blue-500: #3b82f6;
+  --amber: #f59e0b;
+  --r-sm: 8px;
+  --sidebar-w: 268px;
+}
+
+/* --- 2. Базовые стили и сброс --- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+  background: #f3f5fa;
+  color: #0f172a;
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+/* Утилиты */
+.hidden {
+  display: none !important;
+}
+
+/* --- 3. Общий макет --- */
+.app-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* --- 4. Боковое меню --- */
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  width: var(--sidebar-w);
+  color: #fff;
+  background: linear-gradient(180deg, var(--navy-800) 0%, var(--navy-900) 100%);
+}
+
+/* Шапка меню */
+.logo {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 22px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.logo-icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--blue-500), #0ea5e9);
+}
+
+.logo-title {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.logo-sub {
+  font-size: 11px;
+  color: #8fa3c7;
+}
+
+/* Навигация */
+.nav-menu {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+  padding: 18px 12px;
+  overflow-y: auto;
+}
+
+.nav-label {
+  padding: 8px 14px 6px;
+  font-size: 11px;
+  font-weight: 500;
+  color: #5f759e;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.nav-item {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 11px 14px;
+  font-weight: 500;
+  color: #a9b9d8;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: var(--r-sm);
+  transition:
+    background 0.15s,
+    color 0.15s;
+}
+
+.nav-item:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.nav-item.active {
+  color: #fff;
+  background: rgba(59, 130, 246, 0.18);
+}
+
+.nav-icon {
+  width: 22px;
+  font-size: 18px;
+  text-align: center;
+}
+
+.nav-badge {
+  min-width: 20px;
+  padding: 1px 7px;
+  margin-left: auto;
+  font-size: 11px;
+  font-weight: 700;
+  color: #3b2300;
+  text-align: center;
+  background: var(--amber);
+  border-radius: 999px;
+}
+
+/* Профиль пользователя */
+.user-profile {
+  padding: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.user-card {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, #0ea5e9, #8b5cf6);
+  border-radius: 50%;
+}
+
+.user-name {
+  display: block;
+  font-weight: 600;
+}
+
+.user-role {
+  display: block;
+  font-size: 12px;
+  color: #8fa3c7;
+}
+
+.role-select {
+  width: 100%;
+  padding: 8px 10px;
+  color: #fff;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--r-sm);
+  outline: none;
+}
+
+.role-select option {
+  color: #000;
+}

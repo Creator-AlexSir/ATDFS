@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>СППА — Система прогнозирования продаж авиабилетов</title>
+    <link href="style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- ============ Боковое меню ============ -->
+      <aside class="sidebar" id="sidebar">
+        <div class="logo">
+          <span class="logo-icon">✈</span>
+          <div>
+            <div class="logo-title">СПСА</div>
+            <div class="logo-sub">Прогноз спроса на авиабилеты</div>
+          </div>
+        </div>
+
+        <nav class="nav-menu">
+          <div class="nav-label">Работа</div>
+          <a href="#" class="nav-item active" data-tab="dashboard"
+            ><span class="nav-icon">📊</span><span>Дашборд</span></a
+          >
+          <a href="#" class="nav-item" data-tab="flights"
+            ><span class="nav-icon">🛫</span><span>Рейсы</span></a
+          >
+          <a href="#" class="nav-item" data-tab="prices"
+            ><span class="nav-icon">💰</span><span>Ценообразование</span
+            ><span class="nav-badge hidden" id="pending-badge">0</span></a
+          >
+          <a href="#" class="nav-item" data-tab="reports"
+            ><span class="nav-icon">📄</span><span>Отчёты</span></a
+          >
+          <div class="nav-label">Администрирование</div>
+          <a href="#" class="nav-item" data-tab="journal"
+            ><span class="nav-icon">🛡️</span><span>Журнал действий</span></a
+          >
+          <a href="#" class="nav-item" data-tab="settings"
+            ><span class="nav-icon">⚙️</span><span>Настройки</span></a
+          >
+          <a href="#" class="nav-item" data-tab="help"
+            ><span class="nav-icon">❓</span><span>Справка</span></a
+          >
+        </nav>
+
+        <div class="user-profile">
+          <div class="user-card">
+            <div class="avatar" id="user-avatar">А</div>
+            <div>
+              <span class="user-name" id="user-name">Аналитик</span>
+              <span class="user-role" id="user-role">Отдел продаж</span>
+            </div>
+          </div>
+          <select
+            class="role-select"
+            id="role-select"
+            title="Смена роли (демонстрация разграничения доступа)"
+          >
+            <option value="analyst">Роль: Аналитик</option>
+            <option value="head">Роль: Руководитель отдела продаж</option>
+            <option value="manager">Роль: Менеджер по продажам</option>
+            <option value="admin">Роль: Администратор БД</option>
+            <option value="security">Роль: Специалист по безопасности</option>
+          </select>
+        </div>
+      </aside>
+    </div>
+
+    <script src="jquery.js"></script>
+    <script src="jquery.flot.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
