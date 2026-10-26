@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Система прогнозирования спроса на авиабилеты</title>
     <link href="style.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
   </head>
   <body>
     <div class="app-container">
@@ -19,31 +23,35 @@
         </div>
 
         <nav class="nav-menu">
-          <div class="nav-label">Работа</div>
+          <div class="nav-label">Аналитика</div>
           <a href="#" class="nav-item active" data-tab="dashboard"
-            ><span class="nav-icon">📊</span><span>Дашборд</span></a
+            ><span class="nav-icon"><i class="fa-solid fa-chart-bar"></i></span
+            ><span>Дашборд</span></a
           >
           <a href="#" class="nav-item" data-tab="flights"
-            ><span class="nav-icon">🛫</span><span>Рейсы</span></a
+            ><span class="nav-icon"><i class="fa-solid fa-plane"></i></span
+            ><span>Рейсы</span></a
           >
           <a href="#" class="nav-item" data-tab="prices"
-            ><span class="nav-icon">💰</span><span>Ценообразование</span
+            ><span class="nav-icon"><i class="fa-solid fa-tags"></i></span
+            ><span>Ценообразование</span
             ><span class="nav-badge hidden" id="pending-badge">0</span></a
           >
           <a href="#" class="nav-item" data-tab="reports"
-            ><span class="nav-icon">📄</span><span>Отчёты</span></a
+            ><span class="nav-icon"><i class="fa-solid fa-file-lines"></i></span
+            ><span>Отчёты</span></a
           >
           <div class="nav-label">Администрирование</div>
           <a href="#" class="nav-item" data-tab="journal"
-            ><span class="nav-icon">🛡️</span><span>Журнал действий</span></a
-          >
-          <a href="#" class="nav-item" data-tab="settings"
-            ><span class="nav-icon">⚙️</span><span>Настройки</span></a
-          >
-          <a href="#" class="nav-item" data-tab="help"
-            ><span class="nav-icon">❓</span><span>Справка</span></a
+            ><span class="nav-icon"><i class="fa-solid fa-book-open"></i></span
+            ><span>Журнал действий</span></a
           >
         </nav>
+        <a href="#" class="nav-item" id="reference" data-tab="help"
+          ><span class="nav-icon"
+            ><i class="fa-solid fa-circle-question"></i></span
+          ><span>Справка</span></a
+        >
 
         <div class="user-profile">
           <div class="user-card">

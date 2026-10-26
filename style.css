@@ -199,3 +199,12 @@ textarea {
 .role-select option {
   color: #000;
 }
+
+#reference {
+  border-radius: 0px;
+}
+
+.sidebar-bottom {
+  padding: 8px 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08); /* Тонкая линия-разделитель */
+}
