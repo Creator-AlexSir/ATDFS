@@ -1,4 +1,4 @@
-/* --- 1. Переменные --- */
+/* --- Переменные --- */
 :root {
   --navy-900: #0b1a33;
   --navy-800: #11264a;
@@ -8,7 +8,7 @@
   --sidebar-w: 250px;
 }
 
-/* --- 2. Базовые стили и сброс --- */
+/* --- Базовые стили и сброс --- */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -38,13 +38,43 @@ textarea {
   display: none !important;
 }
 
-/* --- 3. Общий макет --- */
+/* --- Общий макет --- */
 .app-container {
   display: flex;
   min-height: 100vh;
 }
 
-/* --- 4. Боковое меню --- */
+/* --- Контейнер с контентом --- */
+
+.tab-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 24px 32px;
+  gap: 20px;
+  background-color: #f3f5fa;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 10px;
+}
+
+.page-header h1 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--navy-900);
+}
+
+.subtitle {
+  color: #64748b;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+/* --- 1. Боковое меню --- */
 .sidebar {
   top: 0;
   bottom: 0;
@@ -113,8 +143,14 @@ textarea {
   padding: 11px 14px;
   font-weight: 500;
   color: #a9b9d8;
+  background-color: linear-gradient(
+    180deg,
+    var(--navy-800) 0%,
+    var(--navy-900) 100%
+  );
   text-decoration: none;
   cursor: pointer;
+  border: none;
   border-radius: var(--r-sm);
   transition:
     background 0.15s,
@@ -135,18 +171,6 @@ textarea {
   width: 22px;
   font-size: 18px;
   text-align: center;
-}
-
-.nav-badge {
-  min-width: 20px;
-  padding: 1px 7px;
-  margin-left: auto;
-  font-size: 11px;
-  font-weight: 700;
-  color: #3b2300;
-  text-align: center;
-  background: var(--amber);
-  border-radius: 999px;
 }
 
 /* Профиль пользователя */
@@ -208,8 +232,164 @@ textarea {
   border-top: 1px solid rgba(255, 255, 255, 0.08); /* Тонкая линия-разделитель */
 }
 
-/*Контейнер для функционала*/
+/* --- 2. Дашборд --- */
 
-.work-container {
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 380px; /* Слева график, справа настройки */
+  gap: 20px;
+  align-items: start;
+}
+
+.stack {
   display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Карточки */
+.card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+}
+
+.card-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-header h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--navy-800);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.card-body.flush {
+  padding: 0;
+}
+
+/* График */
+.chart-area {
+  height: 400px;
+  width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chart-placeholder {
+  text-align: center;
+  color: #94a3b8;
+}
+
+.chart-legend {
+  display: flex;
+  gap: 16px;
+  font-size: 12px;
+  color: #64748b;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.dot.history {
+  background: var(--blue-500);
+}
+.dot.forecast {
+  background: var(--amber);
+}
+
+/* Формы */
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 6px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form-input:focus {
+  border-color: var(--blue-500);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.form-input.mono {
+  font-family: monospace;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.hint {
+  font-size: 11px;
+  color: #94a3b8;
+  margin-top: 4px;
+  display: block;
+}
+
+/* Таблица */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.data-table td {
+  padding: 8px 0;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 13px;
+}
+.data-table tr:last-child td {
+  border-bottom: none;
+}
+.num {
+  text-align: right;
+  font-family: monospace;
+  font-weight: 600;
+}
+.text-success {
+  color: #10b981;
+}
+
+@media (max-width: 1200px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
 }
