@@ -13,7 +13,7 @@
   </head>
   <body>
     <div class="app-container">
-      <!-- ============ Боковое меню ============ -->
+      <!-- ============ 1. Боковое меню ============ -->
       <aside class="sidebar" id="sidebar">
         <div class="logo">
           <img src="images/logo.svg" alt="Логотип" id="logo-icon" />
@@ -76,7 +76,7 @@
           </select>
         </div>
       </aside>
-      <!-- Дашборд -->
+      <!-- ============ 2. Дашборд ============ -->
       <main class="tab-content" id="dashboard">
         <!-- Шапка дашборда -->
         <header class="page-header">
@@ -86,100 +86,90 @@
               Загрузка истории, построение прогноза и ценообразование
             </p>
           </div>
-          <button class="btn btn-secondary">
-            <i class="fa-solid fa-file-import"></i> Загрузить из БД
+          <button type="button" class="just-button">
+            <i class="fa-solid fa-file-import"></i> Загрузить данные рейса
           </button>
         </header>
 
         <div class="dashboard-grid">
           <!-- ЛЕВАЯ ЧАСТЬ (График и Блок цены) -->
-          <div class="stack">
-            <!-- Карточка с графиком -->
-            <section class="card">
-              <div class="card-header">
-                <h2>
-                  <i class="fa-solid fa-chart-line"></i> История и прогноз
-                  спроса
-                </h2>
-                <div class="chart-legend">
-                  <span class="legend-item"
-                    ><i class="dot history"></i> История</span
-                  >
-                  <span class="legend-item"
-                    ><i class="dot forecast"></i> Прогноз</span
-                  >
-                </div>
-              </div>
-              <div class="card-body flush">
-                <div id="plot-container" class="chart-area">
-                  <div class="chart-placeholder">
-                    <p>Введите данные и нажмите «Построить прогноз»</p>
-                  </div>
-                </div>
-              </div>
-            </section>
-          </div>
 
-          <!-- ПРАВАЯ КОЛОННА (ПАРАМЕТРЫ ПРОГНОЗА) -->
-          <div class="stack">
-            <!-- Карточка ввода данных -->
-            <section class="card">
-              <div class="card-header">
-                <h2>Параметры прогноза</h2>
+          <section class="card" id="graph">
+            <div class="card-header">
+              <h2>
+                <i class="fa-solid fa-chart-line"></i> История и прогноз спроса
+              </h2>
+              <div class="chart-legend">
+                <span class="legend-item"
+                  ><i class="dot history"></i> История</span
+                >
+                <span class="legend-item"
+                  ><i class="dot forecast"></i> Прогноз</span
+                >
               </div>
-              <div class="card-body">
+            </div>
+            <div class="card-body flush">
+              <div id="plot-container" class="chart-area">
+                <div class="chart-placeholder">
+                  <p>Введите данные и нажмите «Построить прогноз»</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ПРАВАЯ ЧАСТЬ (ПАРАМЕТРЫ ПРОГНОЗА) -->
+
+          <!-- Параметры модели -->
+          <section class="card" id="param">
+            <div class="card-header">
+              <h2>Параметры прогноза</h2>
+            </div>
+            <div class="card-body">
+              <div class="form-group">
+                <label>Выбор рейса</label>
+                <select class="form-input">
+                  <option>SU-123 (Москва — СПб)</option>
+                  <option>SU-456 (Москва — Сочи)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>История продаж (ряд)</label>
+                <textarea
+                  class="form-input mono"
+                  rows="2"
+                  placeholder="Запишите числа через пробел"
+                ></textarea>
+                <span class="hint"
+                  >Числа записываются через пробел. Символ «*» — рейс был
+                  распродан.</span
+                >
+              </div>
+
+              <div class="form-group">
+                <label>Формула модели</label>
+                <select class="form-input mono">
+                  <option>x[t] = a0 + a1*t (Линейный тренд)</option>
+                  <option>x[t] = a0 + a1*t + a2*t^2 (Полином)</option>
+                </select>
+              </div>
+
+              <div class="form-row">
                 <div class="form-group">
-                  <label>Выбор рейса</label>
-                  <select class="form-input">
-                    <option>SU-123 (Москва — СПб)</option>
-                    <option>SU-456 (Москва — Сочи)</option>
-                  </select>
+                  <label>Горизонт (N)</label>
+                  <input type="number" class="form-input" value="10" min="1" />
                 </div>
-
                 <div class="form-group">
-                  <label>История продаж (ряд)</label>
-                  <textarea
-                    class="form-input mono"
-                    rows="2"
-                    placeholder="2 5 8 11 14 *"
-                  >
-2 5 8 11 14</textarea
-                  >
-                  <span class="hint"
-                    >Числа через пробел. Символ «*» — рейс был распродан.</span
-                  >
+                  <label>Вместимость</label>
+                  <input type="number" class="form-input" value="150" />
                 </div>
-
-                <div class="form-group">
-                  <label>Формула модели</label>
-                  <select class="form-input mono">
-                    <option>x[t] = a0 + a1*t (Линейный тренд)</option>
-                    <option>x[t] = a0 + a1*t + a2*t^2 (Полином)</option>
-                  </select>
-                </div>
-
-                <div class="form-row">
-                  <div class="form-group">
-                    <label>Горизонт (N)</label>
-                    <input
-                      type="number"
-                      class="form-input"
-                      value="10"
-                      min="1"
-                    />
-                  </div>
-                  <div class="form-group">
-                    <label>Вместимость</label>
-                    <input type="number" class="form-input" value="150" />
-                  </div>
-                </div>
-
-                <button class="btn btn-primary btn-block">
-                  <i class="fa-solid fa-calculator"></i> Построить прогноз
-                </button>
               </div>
-            </section>
-          </div>
+
+              <button type="button" class="card-button">
+                <i class="fa-solid fa-calculator"></i> Построить прогноз
+              </button>
+            </div>
+          </section>
         </div>
       </main>
     </div>
