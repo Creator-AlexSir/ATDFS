@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Система прогнозирования спроса на авиабилеты</title>
+    <link href="style.css" rel="stylesheet" />
+    <link rel="icon" href="images/favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- ============ 1. Боковое меню ============ -->
+      <aside class="sidebar" id="sidebar">
+        <div class="logo">
+          <img src="images/logo.svg" alt="Логотип" id="logo-icon" />
+          <div>
+            <div class="logo-title">СПСА</div>
+            <div class="logo-sub">
+              Система прогнозирования спроса на авиабилеты
+            </div>
+          </div>
+        </div>
+
+        <nav class="nav-menu">
+          <div class="nav-label">Аналитика</div>
+          <button type="button" class="nav-item active" data-tab="dashboard">
+            <span class="nav-icon"><i class="fa-solid fa-chart-bar"></i></span
+            ><span>Дашборд</span>
+          </button>
+          <button type="button" class="nav-item" data-tab="flights">
+            <span class="nav-icon"><i class="fa-solid fa-plane"></i></span
+            ><span>Рейсы</span>
+          </button>
+          <button type="button" class="nav-item" data-tab="prices">
+            <span class="nav-icon"><i class="fa-solid fa-tags"></i></span
+            ><span>Ценообразование</span>
+          </button>
+          <button type="button" class="nav-item" data-tab="reports">
+            <span class="nav-icon"><i class="fa-solid fa-file-lines"></i></span
+            ><span>Отчёты</span>
+          </button>
+          <div class="nav-label">Администрирование</div>
+          <button type="button" class="nav-item" data-tab="journal">
+            <span class="nav-icon"><i class="fa-solid fa-book-open"></i></span
+            ><span>Журнал действий</span>
+          </button>
+        </nav>
+        <button type="button" class="nav-item" id="reference" data-tab="help">
+          <span class="nav-icon"
+            ><i class="fa-solid fa-circle-question"></i></span
+          ><span>Справка</span>
+        </button>
+
+        <div class="user-profile">
+          <div class="user-card">
+            <div class="avatar" id="user-avatar">А</div>
+            <div>
+              <span class="user-name" id="user-name">Аналитик</span>
+              <span class="user-role" id="user-role">Отдел продаж</span>
+            </div>
+          </div>
+          <select
+            class="role-select"
+            id="role-select"
+            title="Смена роли (демонстрация разграничения доступа)"
+          >
+            <option value="analyst">Роль: Аналитик</option>
+            <option value="head">Роль: Руководитель отдела продаж</option>
+            <option value="manager">Роль: Менеджер по продажам</option>
+            <option value="admin">Роль: Администратор БД</option>
+            <option value="security">Роль: Специалист по безопасности</option>
+          </select>
+        </div>
+      </aside>
+      <!-- ============ 2. Дашборд ============ -->
+      <main class="tab-content" id="dashboard">
+        <!-- Шапка дашборда -->
+        <header class="page-header">
+          <div>
+            <h1>Рабочая область аналитика</h1>
+            <p class="subtitle">
+              Загрузка истории, построение прогноза и ценообразование
+            </p>
+          </div>
+          <button type="button" class="just-button" id="load-from-db">
+            <i class="fa-solid fa-file-import"></i> Загрузить данные рейса
+          </button>
+        </header>
+
+        <div class="dashboard-grid">
+          <!-- ЛЕВАЯ ЧАСТЬ (График и Блок цены) -->
+
+          <section class="card" id="graph">
+            <div class="card-header">
+              <h2>
+                <i class="fa-solid fa-chart-line"></i> История и прогноз спроса
+              </h2>
+              <div class="chart-legend">
+                <span class="legend-item"
+                  ><i class="dot history"></i> История</span
+                >
+                <span class="legend-item"
+                  ><i class="dot forecast"></i> Прогноз</span
+                >
+              </div>
+            </div>
+            <div class="card-body flush">
+              <div id="plot-container" class="chart-area">
+                <div class="chart-placeholder">
+                  <p>Введите данные и нажмите «Построить прогноз»</p>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <p id="price-recommendation" class="hint"></p>
+              <button type="button" class="just-button" id="adjust-price">
+                <i class="fa-solid fa-pen"></i> Скорректировать цену
+              </button>
+              <button type="button" class="just-button hidden" id="approve-price">
+                <i class="fa-solid fa-circle-check"></i> Утвердить цену
+              </button>
+            </div>
+          </section>
+
+          <!-- ПРАВАЯ ЧАСТЬ (ПАРАМЕТРЫ ПРОГНОЗА) -->
+
+          <!-- Параметры модели -->
+          <section class="card" id="param">
+            <div class="card-header">
+              <h2>Параметры прогноза</h2>
+            </div>
+            <div class="card-body">
+              <div class="form-group">
+                <label>Выбор рейса</label>
+                <select class="form-input">
+                  <option>SU-123 (Москва — СПб)</option>
+                  <option>SU-456 (Москва — Сочи)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>История продаж (ряд)</label>
+                <textarea
+                  class="form-input mono"
+                  rows="2"
+                  placeholder="Запишите числа через пробел"
+                ></textarea>
+                <span class="hint"
+                  >Числа записываются через пробел. Символ «*» — рейс был
+                  распродан.</span
+                >
+              </div>
+
+              <div class="form-group">
+                <label>Формула модели</label>
+                <select class="form-input mono">
+                  <option>x[t] = a0 + a1*t (Линейный тренд)</option>
+                  <option>x[t] = a0 + a1*t + a2*t^2 (Полином)</option>
+                </select>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Горизонт (N)</label>
+                  <input type="number" class="form-input" value="10" min="1" />
+                </div>
+                <div class="form-group">
+                  <label>Вместимость</label>
+                  <input type="number" class="form-input" value="150" />
+                </div>
+              </div>
+
+              <button type="button" class="card-button">
+                <i class="fa-solid fa-calculator"></i> Построить прогноз
+              </button>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <!-- ============ 3. Рейсы ============ -->
+      <main class="tab-content hidden" id="flights">
+        <header class="page-header">
+          <div>
+            <h1>Рейсы</h1>
+            <p class="subtitle">Справочник рейсов и вместимость воздушных судов</p>
+          </div>
+        </header>
+        <section class="card">
+          <div class="card-header">
+            <h2>Список рейсов</h2>
+          </div>
+          <div class="card-body">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <td>Рейс</td>
+                  <td>Маршрут</td>
+                  <td class="num">Вместимость</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>SU-123</td>
+                  <td>Москва — СПб</td>
+                  <td class="num">150</td>
+                </tr>
+                <tr>
+                  <td>SU-456</td>
+                  <td>Москва — Сочи</td>
+                  <td class="num">180</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+
+      <!-- ============ 4. Ценообразование ============ -->
+      <main class="tab-content hidden" id="prices">
+        <header class="page-header">
+          <div>
+            <h1>Ценообразование</h1>
+            <p class="subtitle">Рекомендация цены и ручная корректировка</p>
+          </div>
+        </header>
+        <section class="card">
+          <div class="card-header">
+            <h2>Рекомендация цены</h2>
+          </div>
+          <div class="card-body">
+            <p class="hint">
+              Цена рассчитывается на вкладке «Дашборд» после построения прогноза:
+              спрос выше 80% вместимости — наценка 10%, ниже 50% — скидка 10%.
+              История корректировок доступна во вкладке «Журнал действий».
+            </p>
+          </div>
+        </section>
+      </main>
+
+      <!-- ============ 5. Отчёты ============ -->
+      <main class="tab-content hidden" id="reports">
+        <header class="page-header">
+          <div>
+            <h1>Отчёты</h1>
+            <p class="subtitle">Выгрузка результатов прогнозирования и цен</p>
+          </div>
+        </header>
+        <section class="card">
+          <div class="card-header">
+            <h2>Формирование отчёта</h2>
+          </div>
+          <div class="card-body">
+            <p class="hint">
+              Отчёт формируется в формате CSV и содержит историю изменения цен.
+            </p>
+            <button type="button" class="card-button" id="download-report">
+              <i class="fa-solid fa-file-arrow-down"></i> Скачать отчёт
+            </button>
+          </div>
+        </section>
+      </main>
+
+      <!-- ============ 6. Журнал действий ============ -->
+      <main class="tab-content hidden" id="journal">
+        <header class="page-header">
+          <div>
+            <h1>Журнал действий</h1>
+            <p class="subtitle">История изменения цен (localStorage)</p>
+          </div>
+        </header>
+        <section class="card">
+          <div class="card-header">
+            <h2>Изменения цен</h2>
+          </div>
+          <div class="card-body">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <td>Дата</td>
+                  <td>Рейс</td>
+                  <td class="num">Цена</td>
+                  <td>Статус</td>
+                  <td>Основание</td>
+                </tr>
+              </thead>
+              <tbody id="journal-body"></tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+
+      <!-- ============ 7. Справка ============ -->
+      <main class="tab-content hidden" id="help">
+        <header class="page-header">
+          <div>
+            <h1>Справка</h1>
+            <p class="subtitle">Порядок работы с системой</p>
+          </div>
+        </header>
+        <section class="card">
+          <div class="card-header">
+            <h2>Как построить прогноз</h2>
+          </div>
+          <div class="card-body">
+            <p class="hint">
+              1. На вкладке «Дашборд» загрузите историю продаж или введите ряд
+              вручную через пробел.<br />
+              2. Выберите формулу модели и укажите горизонт прогноза.<br />
+              3. Нажмите «Построить прогноз» — появятся график и рекомендация
+              цены.<br />
+              4. Цену можно скорректировать кнопкой «Скорректировать цену»;
+              изменения попадут в журнал.
+            </p>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="jquery.js"></script>
+    <script src="jquery.flot.js"></script>
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
