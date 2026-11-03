@@ -81,9 +81,10 @@
         <!-- Шапка дашборда -->
         <header class="page-header">
           <div>
-            <h1>Рабочая область аналитика</h1>
+            <h1>Что-то там</h1>
             <p class="subtitle">
-              Загрузка истории, построение прогноза и ценообразование
+              Не знаю что писать, по моему разграничение функционала для разных
+              пользователей - это фигня
             </p>
           </div>
           <button type="button" class="just-button">
@@ -92,8 +93,7 @@
         </header>
 
         <div class="dashboard-grid">
-          <!-- ЛЕВАЯ ЧАСТЬ (График и Блок цены) -->
-
+          <!-- График -->
           <section class="card" id="graph">
             <div class="card-header">
               <h2>
@@ -116,8 +116,6 @@
               </div>
             </div>
           </section>
-
-          <!-- ПРАВАЯ ЧАСТЬ (ПАРАМЕТРЫ ПРОГНОЗА) -->
 
           <!-- Параметры модели -->
           <section class="card" id="param">
@@ -168,6 +166,54 @@
               <button type="button" class="card-button">
                 <i class="fa-solid fa-calculator"></i> Построить прогноз
               </button>
+            </div>
+          </section>
+
+          <!-- Результаты -->
+          <section class="card">
+            <div class="card-header">
+              <h2>Результаты расчета</h2>
+            </div>
+            <div class="card-body">
+              <table class="data-table">
+                <tbody>
+                  <tr>
+                    <td>Коэффициент α₀</td>
+                    <td class="num">2.0000</td>
+                  </tr>
+                  <tr>
+                    <td>Коэффициент α₁</td>
+                    <td class="num">3.0000</td>
+                  </tr>
+                  <tr>
+                    <td>MAPE (точность)</td>
+                    <td class="num text-success">4.2% (норма ≤ 10%)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- Цена -->
+          <section class="card">
+            <div class="card-header">
+              <h2>Рекомендация цены</h2>
+            </div>
+            <div class="card-body">
+              <div class="price-info">
+                <span class="label">Рекомендованная цена</span>
+                <div class="price-value">12 500 ₽</div>
+                <span class="price-status status-rec"
+                  >Спрос высокий (85%) — повышение</span
+                >
+              </div>
+              <div class="form-group" style="margin-top: 16px">
+                <label>Скорректировать вручную</label>
+                <div class="input-with-btn">
+                  <input type="number" class="form-input" placeholder="12500" />
+                  <button type="button" class="card-button">Сохранить</button>
+                </div>
+              </div>
             </div>
           </section>
         </div>

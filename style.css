@@ -53,6 +53,8 @@ textarea {
   padding: 24px 32px;
   gap: 20px;
   background-color: #f3f5fa;
+  height: 100vh;
+  overflow-y: auto;
 }
 
 .page-header {
@@ -99,6 +101,14 @@ textarea {
   box-shadow: none;
 }
 
+.input-with-btn {
+  display: flex;
+  gap: 8px;
+}
+.input-with-btn .form-input {
+  flex: 1;
+}
+
 /* --- Карточки --- */
 .card {
   background: #fff;
@@ -109,7 +119,7 @@ textarea {
 }
 
 .card-header {
-  padding: 16px 20px;
+  padding: 10px 20px;
   border-bottom: 1px solid #e2e8f0;
   display: flex;
   justify-content: space-between;
@@ -325,8 +335,12 @@ textarea {
 }
 
 /* График */
+#graph {
+  height: 500px;
+}
+
 .chart-area {
-  height: 400px;
+  height: 430px;
   width: 100%;
   position: relative;
   display: flex;
@@ -365,6 +379,10 @@ textarea {
 }
 
 /* Параметры модели */
+#param {
+  height: 500px;
+}
+
 .form-group {
   margin-bottom: 16px;
 }
@@ -409,7 +427,13 @@ textarea {
   display: block;
 }
 
-/* Таблица */
+@media (max-width: 1200px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Таблица результатов */
 .data-table {
   width: 100%;
   border-collapse: collapse;
@@ -417,7 +441,8 @@ textarea {
 .data-table td {
   padding: 8px 0;
   border-bottom: 1px solid #f1f5f9;
-  font-size: 13px;
+  font-size: 16px;
+  color: #475569;
 }
 .data-table tr:last-child td {
   border-bottom: none;
@@ -431,8 +456,32 @@ textarea {
   color: #10b981;
 }
 
-@media (max-width: 1200px) {
-  .dashboard-grid {
-    grid-template-columns: 1fr;
-  }
+/* Цена */
+.price-info {
+  background: #f8fafc;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  text-align: center;
+}
+.price-info .label {
+  font-size: 12px;
+  color: #64748b;
+}
+.price-value {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--navy-800);
+  margin: 6px 0;
+}
+.price-status {
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+.status-rec {
+  background: #d1fae5;
+  color: #047857;
 }
