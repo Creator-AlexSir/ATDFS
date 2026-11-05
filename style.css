@@ -325,9 +325,9 @@ textarea {
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* --- 2. Дашборд --- */
+/* --- 2. Аналитика --- */
 
-.dashboard-grid {
+.analytics-grid {
   display: grid;
   grid-template-columns: 1fr 380px;
   gap: 20px;
@@ -469,10 +469,10 @@ textarea {
   color: #64748b;
 }
 .price-value {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 800;
   color: var(--navy-800);
-  margin: 6px 0;
+  margin: 3px 0;
 }
 .price-status {
   font-size: 12px;
@@ -484,4 +484,29 @@ textarea {
 .status-rec {
   background: #d1fae5;
   color: #047857;
+}
+
+/* --- 3. Рейсы --- */
+
+.flights-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid black;
+}
+
+.flights-table td {
+  padding: 8px 0;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 16px;
+  color: #475569;
+  border: 1px solid black;
+}
+
+.flights-table tr:last-child td {
+  border-bottom: none;
+  border: 1px solid black;
+}
+
+#flights-card {
+  width: 50%;
 }

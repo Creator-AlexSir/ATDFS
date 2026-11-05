@@ -12,7 +12,7 @@
     />
   </head>
   <body>
-    <div class="app-container">
+    <main class="app-container">
       <!-- ============ 1. Боковое меню ============ -->
       <aside class="sidebar" id="sidebar">
         <div class="logo">
@@ -27,9 +27,9 @@
 
         <nav class="nav-menu">
           <div class="nav-label">Аналитика</div>
-          <button type="button" class="nav-item active" data-tab="dashboard">
-            <span class="nav-icon"><i class="fa-solid fa-chart-bar"></i></span
-            ><span>Дашборд</span>
+          <button type="button" class="nav-item active" data-tab="analytics">
+            <span class="nav-icon"><i class="fa-solid fa-chart-line"></i></span
+            ><span>Аналитика</span>
           </button>
           <button type="button" class="nav-item" data-tab="flights">
             <span class="nav-icon"><i class="fa-solid fa-plane"></i></span
@@ -76,12 +76,12 @@
           </select>
         </div>
       </aside>
-      <!-- ============ 2. Дашборд ============ -->
-      <main class="tab-content" id="dashboard">
-        <!-- Шапка дашборда -->
+      <!-- ============ 2. Аналитика ============ -->
+      <div class="tab-content" id="analytics">
+        <!-- Шапка -->
         <header class="page-header">
           <div>
-            <h1>Что-то там</h1>
+            <h1>Аналитика</h1>
             <p class="subtitle">
               Не знаю что писать, по моему разграничение функционала для разных
               пользователей - это фигня
@@ -92,13 +92,11 @@
           </button>
         </header>
 
-        <div class="dashboard-grid">
+        <div class="analytics-grid">
           <!-- График -->
           <section class="card" id="graph">
             <div class="card-header">
-              <h2>
-                <i class="fa-solid fa-chart-line"></i> История и прогноз спроса
-              </h2>
+              <h2>История и прогноз спроса</h2>
               <div class="chart-legend">
                 <span class="legend-item"
                   ><i class="dot history"></i> История</span
@@ -217,8 +215,50 @@
             </div>
           </section>
         </div>
-      </main>
-    </div>
+      </div>
+
+      <!-- ============ 3. Рейсы ============ -->
+      <div class="tab-content hidden" id="flights">
+        <!-- Шапка -->
+        <header class="page-header">
+          <div>
+            <h1>Рейсы</h1>
+            <p class="subtitle">Данные о рейсах</p>
+          </div>
+        </header>
+        <section class="card" id="flights-card">
+          <div class="card-header">
+            <h2>Таблица рейсов</h2>
+          </div>
+          <div class="card-body">
+            <table class="flights-table">
+              <thead>
+                <tr>
+                  <th>Номер рейса</th>
+                  <th>Маршрут</th>
+                  <th>Дата и время вылета</th>
+                  <th>Вместимость</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Создание сайта</td>
+                  <td>20 000 руб.</td>
+                  <td>Создание сайта</td>
+                  <td>20 000 руб.</td>
+                </tr>
+                <tr>
+                  <td>Настройка рекламы</td>
+                  <td>10 000 руб.</td>
+                  <td>Настройка рекламы</td>
+                  <td>10 000 руб.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </main>
 
     <script src="jquery.js"></script>
     <script src="jquery.flot.js"></script>
