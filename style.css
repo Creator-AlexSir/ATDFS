@@ -491,22 +491,29 @@ textarea {
 .flights-table {
   width: 100%;
   border-collapse: collapse;
-  border: 1px solid black;
+  text-align: center;
+  border-radius: 5px;
 }
 
 .flights-table td {
   padding: 8px 0;
   border-bottom: 1px solid #f1f5f9;
   font-size: 16px;
-  color: #475569;
-  border: 1px solid black;
+  color: #2c2f33;
 }
 
 .flights-table tr:last-child td {
   border-bottom: none;
-  border: 1px solid black;
+}
+
+.flights-table thead {
+  border-bottom: 1px solid #f1f5f9;
 }
 
 #flights-card {
-  width: 50%;
+  width: 100%;
+  overflow: auto;
+}
+
+#flights-card .card-header {
 }
