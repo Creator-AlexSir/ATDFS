@@ -522,3 +522,40 @@ textarea {
   overflow: auto;
   padding: 0 0 5px 0;
 }
+/* --- 4. Отчеты --- */
+
+/* --- 5. Журнал действий --- */
+
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.history-table td {
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 16px;
+  color: #2c2f33;
+  padding: 8px 0;
+}
+
+.history-table tr:last-child td {
+  border-bottom: none;
+}
+
+.history-table thead th {
+  font-size: 16px;
+  border-bottom: 1px solid #f1f5f9;
+  position: sticky;
+  top: 0;
+  background-color: #ffffff;
+  box-shadow: inset 0 -1px 0 #f1f5f9;
+  z-index: 2;
+  padding: 0 0 10px 0;
+}
+
+.scroll {
+  max-height: 600px;
+  overflow: auto;
+  padding: 0 0 5px 0;
+}
