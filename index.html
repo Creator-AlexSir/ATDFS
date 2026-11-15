@@ -365,18 +365,24 @@
 
       <!-- ============ 4. Отчеты ============ -->
       <div class="tab-content hidden" id="reports">
-        <!-- Шапка -->
         <header class="page-header">
           <div>
-            <h1>Отчеты</h1>
-            <p class="subtitle">Формирование отчетов</p>
+            <h1>Отчёты</h1>
+            <p class="subtitle">Выгрузка результатов прогнозирования и цен</p>
           </div>
         </header>
-        <section class="card" id="flights-card">
+        <section class="card">
           <div class="card-header">
-            <h2>Ы</h2>
+            <h2>Формирование отчёта</h2>
           </div>
-          <div class="card-body">ввв</div>
+          <div class="card-body">
+            <p class="hint">
+              Отчёт формируется в формате CSV и содержит историю изменения цен.
+            </p>
+            <button type="button" class="card-button" id="download-report">
+              <i class="fa-solid fa-file-arrow-down"></i> Скачать отчёт
+            </button>
+          </div>
         </section>
       </div>
 
