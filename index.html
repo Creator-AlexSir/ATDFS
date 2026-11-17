@@ -365,28 +365,102 @@
 
       <!-- ============ 4. Отчеты ============ -->
       <div class="tab-content hidden" id="reports">
-        <!-- Шапка -->
         <header class="page-header">
           <div>
             <h1>Отчёты</h1>
-            <p class="subtitle">Выгрузка результатов прогнозирования и цен</p>
+            <p class="subtitle">
+              Выгрузка результатов прогнозирования и корректировки цен
+            </p>
           </div>
         </header>
-        <!-- Формирование отчетов -->
-        <section class="card">
-          <div class="card-header">
-            <h2>Формирование отчёта</h2>
-          </div>
-          <div class="card-body">
-            <p class="hint">
-              Отчёт формируется в формате CSV и содержит историю изменения цен.
-            </p>
-            <button type="button" class="card-button" id="download-report">
-              <i class="fa-solid fa-file-arrow-down"></i> Скачать отчёт
-            </button>
-          </div>
-        </section>
-        <span style="font-size: 50px; color: red">Тут править надо</span>
+
+        <div class="reports-grid">
+          <!-- Форма -->
+          <section class="card">
+            <div class="card-header">
+              <h2>Параметры отчёта</h2>
+            </div>
+            <div class="card-body">
+              <div class="form-group">
+                <label>Тип отчёта</label>
+                <select class="form-input" id="report-type">
+                  <option value="forecast">Прогноз спроса по рейсам</option>
+                  <option value="prices">Рекомендации по ценам</option>
+                  <option value="journal">Журнал изменения цен</option>
+                  <option value="summary">Сводный отчёт по продажам</option>
+                </select>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Период с</label>
+                  <input
+                    type="date"
+                    class="form-input"
+                    id="report-from"
+                    value="2025-03-01"
+                  />
+                </div>
+                <div class="form-group">
+                  <label>По</label>
+                  <input
+                    type="date"
+                    class="form-input"
+                    id="report-to"
+                    value="2025-03-17"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Рейс</label>
+                <select class="form-input" id="report-flight">
+                  <option value="">Все рейсы</option>
+                  <option>SU-1573</option>
+                  <option>SU-1326</option>
+                  <option>SU-1402</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>Формат файла</label>
+                <select class="form-input" id="report-format">
+                  <option value="csv">CSV (Excel)</option>
+                  <option value="xlsx" disabled>XLSX (скоро)</option>
+                  <option value="pdf" disabled>PDF (скоро)</option>
+                </select>
+              </div>
+
+              <button type="button" class="card-button" id="download-report">
+                <i class="fa-solid fa-file-arrow-down"></i> Сформировать и
+                скачать
+              </button>
+            </div>
+          </section>
+
+          <!-- Предпросмотр -->
+          <section class="card">
+            <div class="card-header">
+              <h2>Предпросмотр</h2>
+              <span class="hint" id="report-rows-count"></span>
+            </div>
+            <div class="card-body">
+              <div class="scroll">
+                <table class="data-table" id="report-preview">
+                  <thead>
+                    <tr>
+                      <th>Дата</th>
+                      <th>Рейс</th>
+                      <th>Показатель</th>
+                      <th>Значение</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+        </div>
       </div>
 
       <!-- ============ 5. Журнал действий ============ -->
@@ -481,19 +555,220 @@
 
       <!-- ============ 6. Справка ============ -->
       <div class="tab-content hidden" id="help">
-        <!-- Шапка -->
         <header class="page-header">
           <div>
             <h1>Справка</h1>
-            <p class="subtitle">Ы</p>
+            <p class="subtitle">
+              Руководство пользователя и ответы на частые вопросы
+            </p>
           </div>
         </header>
-        <section class="card" id="flights-card">
-          <div class="card-header">
-            <h2>Ы</h2>
+
+        <div class="help-grid">
+          <!-- Оглавление -->
+          <section class="card help-toc">
+            <div class="card-header">
+              <h2>Содержание</h2>
+            </div>
+            <div class="card-body">
+              <a href="#help-about" class="help-link">О системе</a>
+              <a href="#help-roles" class="help-link">Роли пользователей</a>
+              <a href="#help-analytics" class="help-link"
+                >Аналитика и прогноз</a
+              >
+              <a href="#help-flights" class="help-link">Рейсы</a>
+              <a href="#help-reports" class="help-link">Отчёты</a>
+              <a href="#help-journal" class="help-link">Журнал действий</a>
+              <a href="#help-faq" class="help-link">Частые вопросы</a>
+            </div>
+          </section>
+
+          <!-- Контент -->
+          <div class="help-content">
+            <!-- О системе -->
+            <section class="card" id="help-about">
+              <div class="card-header">
+                <h2><i class="fa-solid fa-circle-info"></i> О системе</h2>
+              </div>
+              <div class="card-body help-text">
+                <p>
+                  СПСА — система прогнозирования спроса на авиабилеты. Она
+                  анализирует историю продаж по рейсу, строит прогноз спроса на
+                  заданный горизонт и рекомендует цену билета.
+                </p>
+                <p>Основные возможности:</p>
+                <ul>
+                  <li>построение прогноза спроса по истории продаж;</li>
+                  <li>оценка точности модели (MAPE);</li>
+                  <li>рекомендация цены с учётом спроса;</li>
+                  <li>хранение журнала изменения цен;</li>
+                  <li>выгрузка отчётов.</li>
+                </ul>
+              </div>
+            </section>
+
+            <!-- Роли -->
+            <section class="card" id="help-roles">
+              <div class="card-header">
+                <h2><i class="fa-solid fa-users"></i> Роли пользователей</h2>
+              </div>
+              <div class="card-body">
+                <table class="data-table help-table">
+                  <thead>
+                    <tr>
+                      <th>Роль</th>
+                      <th>Доступ</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Аналитик</td>
+                      <td>Прогноз, анализ, корректировка цены, отчёты</td>
+                    </tr>
+                    <tr>
+                      <td>Руководитель отдела продаж</td>
+                      <td>Всё, что у аналитика + утверждение цен, журнал</td>
+                    </tr>
+                    <tr>
+                      <td>Менеджер по продажам</td>
+                      <td>Просмотр рейсов и рекомендованных цен</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p class="hint">
+                  Роль переключается в левом нижнем углу бокового меню
+                  (демонстрация разграничения доступа).
+                </p>
+              </div>
+            </section>
+
+            <!-- Аналитика -->
+            <section class="card" id="help-analytics">
+              <div class="card-header">
+                <h2>
+                  <i class="fa-solid fa-chart-line"></i> Аналитика и прогноз
+                </h2>
+              </div>
+              <div class="card-body help-text">
+                <ol>
+                  <li>Выберите рейс в блоке «Параметры прогноза».</li>
+                  <li>
+                    Введите историю продаж — числа через пробел. Символ
+                    <code>*</code> означает, что рейс был распродан.
+                  </li>
+                  <li>Выберите формулу модели (линейный тренд или полином).</li>
+                  <li>Укажите горизонт прогноза (N) и вместимость рейса.</li>
+                  <li>Нажмите «Построить прогноз».</li>
+                </ol>
+                <p>
+                  Результат появится на графике (история — синим, прогноз —
+                  оранжевым), а коэффициенты модели и точность (MAPE) — в
+                  карточке «Результаты расчёта». Рекомендованная цена
+                  отобразится в карточке «Рекомендация цены».
+                </p>
+                <p class="hint">
+                  MAPE ≤ 10% считается нормой. Чем меньше значение, тем точнее
+                  модель.
+                </p>
+              </div>
+            </section>
+
+            <!-- Рейсы -->
+            <section class="card" id="help-flights">
+              <div class="card-header">
+                <h2><i class="fa-solid fa-plane"></i> Рейсы</h2>
+              </div>
+              <div class="card-body help-text">
+                <p>
+                  Раздел содержит таблицу рейсов: номер, маршрут, дата и время
+                  вылета, вместимость. Шапка таблицы закреплена — при прокрутке
+                  она остаётся на месте.
+                </p>
+              </div>
+            </section>
+
+            <!-- Отчёты -->
+            <section class="card" id="help-reports">
+              <div class="card-header">
+                <h2><i class="fa-solid fa-file-lines"></i> Отчёты</h2>
+              </div>
+              <div class="card-body help-text">
+                <p>
+                  В разделе «Отчёты» можно выгрузить результаты прогнозирования
+                  и корректировки цен. Выберите тип отчёта, период и формат
+                  файла, затем нажмите «Сформировать и скачать».
+                </p>
+              </div>
+            </section>
+
+            <!-- Журнал -->
+            <section class="card" id="help-journal">
+              <div class="card-header">
+                <h2><i class="fa-solid fa-book-open"></i> Журнал действий</h2>
+              </div>
+              <div class="card-body help-text">
+                <p>
+                  Журнал фиксирует все изменения цен: дату, рейс, новую цену,
+                  статус (повышена / понижена / без изменений / скорректирована
+                  вручную) и основание — прогноз спроса, MAPE или решение
+                  сотрудника.
+                </p>
+              </div>
+            </section>
+
+            <!-- FAQ -->
+            <section class="card" id="help-faq">
+              <div class="card-header">
+                <h2>
+                  <i class="fa-solid fa-circle-question"></i> Частые вопросы
+                </h2>
+              </div>
+              <div class="card-body">
+                <details class="faq-item">
+                  <summary>Что означает символ «*» в истории продаж?</summary>
+                  <p>
+                    Это признак того, что рейс был распродан. При расчёте такие
+                    значения обрабатываются отдельно — они не считаются обычным
+                    спросом.
+                  </p>
+                </details>
+                <details class="faq-item">
+                  <summary>Почему MAPE больше 10%?</summary>
+                  <p>
+                    Модель плохо описывает историю продаж. Попробуйте выбрать
+                    другую формулу (например, полином вместо линейного тренда)
+                    или проверить корректность введённого ряда.
+                  </p>
+                </details>
+                <details class="faq-item">
+                  <summary>
+                    Можно ли скорректировать рекомендованную цену?
+                  </summary>
+                  <p>
+                    Да, в карточке «Рекомендация цены» есть поле для ручной
+                    корректировки. После сохранения изменение попадёт в журнал
+                    действий.
+                  </p>
+                </details>
+                <details class="faq-item">
+                  <summary>Как сменить роль?</summary>
+                  <p>
+                    В левом нижнем углу бокового меню есть выпадающий список
+                    ролей. Переключение демонстрирует разграничение доступа.
+                  </p>
+                </details>
+                <details class="faq-item">
+                  <summary>Почему шапка таблицы не прокручивается?</summary>
+                  <p>
+                    Это сделано специально: заголовки закреплены, чтобы при
+                    прокрутке длинного списка рейсов было видно, какая колонка
+                    за что отвечает.
+                  </p>
+                </details>
+              </div>
+            </section>
           </div>
-          <div class="card-body">Справка</div>
-        </section>
+        </div>
       </div>
     </main>
 

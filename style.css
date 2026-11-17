@@ -523,6 +523,12 @@ textarea {
   padding: 0 0 5px 0;
 }
 /* --- 4. Отчеты --- */
+.reports-grid {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 20px;
+  align-items: start;
+}
 
 /* --- 5. Журнал действий --- */
 
@@ -558,4 +564,151 @@ textarea {
   max-height: 600px;
   overflow: auto;
   padding: 0 0 5px 0;
+}
+
+/* --- 6. Справка --- */
+
+.help-grid {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+/* Оглавление */
+.help-toc .card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px;
+}
+
+.help-link {
+  display: block;
+  padding: 8px 12px;
+  border-radius: 8px;
+  color: #475569;
+  font-size: 14px;
+  text-decoration: none;
+  transition:
+    background 0.15s,
+    color 0.15s;
+}
+
+.help-link:hover {
+  background: #f1f5f9;
+  color: var(--navy-800);
+}
+
+/* Контент */
+.help-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.help-text p {
+  margin-bottom: 10px;
+  color: #475569;
+  font-size: 14px;
+}
+
+.help-text p:last-child {
+  margin-bottom: 0;
+}
+
+.help-text ul,
+.help-text ol {
+  margin: 0 0 10px 20px;
+  color: #475569;
+  font-size: 14px;
+}
+
+.help-text li {
+  margin-bottom: 4px;
+}
+
+.help-text code {
+  background: #f1f5f9;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 13px;
+  color: var(--navy-800);
+}
+
+/* Таблица ролей */
+.help-table th {
+  text-align: left;
+  font-size: 13px;
+  font-weight: 600;
+  color: #64748b;
+  padding: 8px 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.help-table td {
+  text-align: left;
+  font-size: 14px;
+  padding: 10px 0;
+  vertical-align: top;
+}
+
+/* FAQ */
+.faq-item {
+  border-bottom: 1px solid #f1f5f9;
+  padding: 12px 0;
+}
+
+.faq-item:first-child {
+  padding-top: 0;
+}
+
+.faq-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.faq-item summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--navy-800);
+  font-size: 14px;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item summary::after {
+  content: "\f078";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  font-size: 12px;
+  color: #94a3b8;
+  transition: transform 0.2s;
+}
+
+.faq-item[open] summary::after {
+  transform: rotate(180deg);
+}
+
+.faq-item p {
+  margin-top: 8px;
+  color: #475569;
+  font-size: 14px;
+}
+
+/* Адаптив */
+@media (max-width: 900px) {
+  .help-grid {
+    grid-template-columns: 1fr;
+  }
+  .help-toc {
+    display: none; /* на узких экранах оглавление не нужно */
+  }
 }
